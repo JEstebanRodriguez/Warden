@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  bcryptjs: ^2.4.3
   cors: ^2.8.5
   dotenv: ^16.0.3
   express: ^4.18.2
@@ -8,6 +9,7 @@ specifiers:
   nodemon: ^2.0.20
 
 dependencies:
+  bcryptjs: 2.4.3
   cors: 2.8.5
   dotenv: 16.0.3
   express: 4.18.2
@@ -878,6 +880,10 @@ packages:
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    dev: false
+
+  /bcryptjs/2.4.3:
+    resolution: {integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==}
     dev: false
 
   /binary-extensions/2.2.0:

@@ -4,7 +4,7 @@ const router = Router()
 
 router.get('/', UserController.getAllUsers)
 router.get('/:_id', UserController.getUserById)
-router.post('/new', UserController.createUser)
+router.post('/add', UserController.createUser)
 router.put('/update/:_id', UserController.updateUserById)
 router.delete('/delete/:_id', UserController.deleteUserById)
 
