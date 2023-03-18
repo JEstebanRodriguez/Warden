@@ -10,53 +10,60 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
+import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("")
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
+  const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log(password);
-    console.log(email);
+  watch("email");
+  const onSubmit = (data) => {
+    console.log(data);
+    // Send data to Endpoint Login user
+    try {
+      // success alert
+    } catch (err) {
+      // error alert
+    }
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Container
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <TextField
+          {...register("email", {
+            required: true,
+            pattern: {
+              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+              message: "Please enter a valid mail",
+            },
+          })}
           type="email"
           id="email"
           label="email"
           variant="outlined"
           sx={{ width: "100%" }}
           margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          helperText={error}
           required
         />
-        <FormControl 
-        sx={{ width: "100%" }} 
-        required
-        variant="outlined">
+        <FormControl sx={{ width: "100%" }} required variant="outlined">
           <InputLabel htmlFor="password">Password</InputLabel>
           <OutlinedInput
+            {...register("password", { required: true })}
             id="password"
             type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -75,7 +82,6 @@ const LoginForm = () => {
 
         <Button
           variant="outlined"
-          onClick={handleLogin}
           type="submit"
           sx={{ marginTop: "10px", width: "max-content", padding: "7px" }}
         >
