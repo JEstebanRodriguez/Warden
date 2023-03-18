@@ -23,18 +23,6 @@ const LoginForm = () => {
     event.preventDefault();
   };
 
-  const isUnused = () => {
-    if (email == password == "") {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  useEffect(() => {
-    isUnused()
-  }, [email, password]
-  )
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -48,7 +36,6 @@ const LoginForm = () => {
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <TextField
-          {...error ? error : null}
           type="email"
           id="email"
           label="email"
@@ -91,7 +78,6 @@ const LoginForm = () => {
           onClick={handleLogin}
           type="submit"
           sx={{ marginTop: "10px", width: "max-content", padding: "7px" }}
-          disabled={isUnused}
         >
           Login
         </Button>
