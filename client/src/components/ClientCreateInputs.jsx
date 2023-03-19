@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, TextField, Paper, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-const ClientCreateInputs = () => {
+const ClientCreateInputs = ({newClient}) => {
   const initialValues = {
     username: "",
     userPassword: "",
@@ -14,7 +14,7 @@ const ClientCreateInputs = () => {
     register,
     handleSubmit,
     formState,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful, isValid },
     reset,
   } = useForm({
     mode: "onChange",
@@ -22,9 +22,13 @@ const ClientCreateInputs = () => {
   });
 
   const onSubmit = (values) => {
-    console.log(errors);
+    // console.log(errors);
     console.log(values);
-    reset({ initialValues });
+    newClient(values)
+    if (isSubmitSuccessful) {
+      console.log('is true')
+      reset(initialValues);
+    }
     // send data to client
     // save data in a table
   };
@@ -39,11 +43,11 @@ const ClientCreateInputs = () => {
         <Paper
           sx={{
             width: "100%",
-            height: "100%",
+            height: "120px",
             display: "flex",
             gap: "10px",
             justifyContent: "space-around",
-            alignItems: 'center',
+            alignItems: 'top',
             padding: "20px",
           }}
         >
@@ -120,8 +124,8 @@ const ClientCreateInputs = () => {
             color="info"
             disableElevation
             size="medium"
-            sx={{height: 'max-content', flex: '1'}}
-            disabled= {formState.errors == {} ? true : false}
+            sx={{height: 'max-content', flex: '1', marginTop: '10px'}}
+            disabled= {!isValid}
           >
             Create event
           </Button>
