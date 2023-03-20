@@ -115,8 +115,8 @@ const ClientsTable = ({rows}) => {
 
 
   return (
-    <Box sx={{ marginTop: "20px" }}>
-      <Paper sx={{ padding: "20px", height: 700 }}>
+    <Box sx={{ marginTop: "10px" }}>
+      <Paper elevation={3} sx={{ padding: "20px", height: 700 }}>
         <DataGrid
           rows={rows}
           columns={columns}

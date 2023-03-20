@@ -11,6 +11,12 @@ const AdminDashboard = () => {
 
   // Needs UseEffect to fetch data with each submit and reset clients state
 
+
+  const handleLogout = () => {
+    // user logout endopoint call
+    console.log('user Logout')
+  }
+
   const addClient = (data) => {
     console.log(data);
     data.id = counter;
@@ -22,13 +28,32 @@ const AdminDashboard = () => {
 
   return (
     <Box component="main" sx={{ padding: "2%" }}>
-      <Fab variant="extended" size="medium" color='secondary' sx={{position: 'absolute', right: '20px', top: '8px'}}>
-        <LogoutIcon sx={{ mr: 1}} />
-        Logout
-      </Fab>
-      <Typography variant="h4" gutterBottom align="center">
-        Dashboard Admin
-      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: '5px'
+        }}
+      >
+        <Typography
+          variant="overline"
+          component="h3"
+          gutterBottom
+          align="left"
+          fontWeight='bold'
+          marginLeft={1}
+          color='secondary'
+        >
+          Hello Admin, welcome to the dashboard
+        </Typography>
+        <Fab variant="extended" size="medium" color="secondary"
+          onClick={handleLogout}
+          >
+          <LogoutIcon sx={{ mr: 1 }} />
+          Logout
+        </Fab>
+      </Box>
       <ClientCreateInputs newClient={addClient} />
       <ClientsTable rows={clients} />
     </Box>

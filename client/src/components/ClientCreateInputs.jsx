@@ -1,8 +1,15 @@
 import React, { useEffect } from "react";
-import { Box, TextField, Paper, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Paper,
+  Button,
+  Typography,
+  Divider,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 
-const ClientCreateInputs = ({newClient}) => {
+const ClientCreateInputs = ({ newClient }) => {
   const initialValues = {
     username: "",
     userPassword: "",
@@ -24,9 +31,9 @@ const ClientCreateInputs = ({newClient}) => {
   const onSubmit = (values) => {
     // console.log(errors);
     console.log(values);
-    newClient(values)
+    newClient(values);
     if (isSubmitSuccessful) {
-      console.log('is true')
+      console.log("is true");
       reset(initialValues);
     }
     // send data to client
@@ -43,18 +50,35 @@ const ClientCreateInputs = ({newClient}) => {
         <Paper
           sx={{
             width: "100%",
-            height: "120px",
-            display: "flex",
-            gap: "10px",
-            justifyContent: "space-around",
-            alignItems: 'top',
+            // height: "120px",
+            // display: "flex",
+            // gap: "10px",
+            // justifyContent: "space-around",
+            // alignItems: "top",
             padding: "20px",
           }}
         >
+          <Divider>
+            {" "}
+            <Typography align="center" variant="h4" component="h4" fontWeight={'bold'}>
+              Add new event:
+            </Typography>
+          </Divider>
+          <Box
+            sx={{
+              width: "100%",
+              height: "80px",
+              display: "flex",
+              gap: "10px",
+              justifyContent: "space-around",
+              alignItems: "top",
+              marginTop: '15px'
+            }}
+          >
             <TextField
               {...register("username", {
-                required: 'Username is required',
-                minLength: {value: 2, message: 'Needs 2 characters or more'},
+                required: "Username is required",
+                minLength: { value: 2, message: "Needs 2 characters or more" },
                 // maxLength: {value: 30, message: 'Too long'},
               })}
               name="username"
@@ -63,13 +87,16 @@ const ClientCreateInputs = ({newClient}) => {
               label="Username"
               error={formState.errors.username ? true : false}
               helperText={formState.errors.username?.message}
-              sx={{flex: '2'}}
+              sx={{ flex: "2" }}
             />
 
             <TextField
               {...register("userPassword", {
                 required: "User Password is required",
-                minLength: {value: 4, message: 'Password needs 4 characters or more'},
+                minLength: {
+                  value: 4,
+                  message: "Password needs 4 characters or more",
+                },
                 // maxLength: {value: 25, message: 'Too long'},
               })}
               nama="userPassword"
@@ -79,17 +106,19 @@ const ClientCreateInputs = ({newClient}) => {
               type="password"
               error={formState.errors.userPassword ? true : false}
               helperText={formState.errors.userPassword?.message}
-              sx={{flex: '2'}}
-
+              sx={{ flex: "2" }}
             />
 
             <TextField
               {...register("eventName", {
                 required: "Event Name is required",
-                minLength: {value: 2, message: 'Event name needs 2 characters or more'},
+                minLength: {
+                  value: 2,
+                  message: "Event name needs 2 characters or more",
+                },
                 maxLength: {
-                  value: 30, 
-                  message: 'Too long'
+                  value: 30,
+                  message: "Too long",
                 },
               })}
               name="eventName"
@@ -100,13 +129,13 @@ const ClientCreateInputs = ({newClient}) => {
               maxRows={2}
               error={formState.errors.eventName ? true : false}
               helperText={formState.errors.eventName?.message}
-              sx={{flex: '4'}}
-
-
+              sx={{ flex: "4" }}
             />
 
             <TextField
-              {...register("maxTickets", { required: "Tickets number is required" })}
+              {...register("maxTickets", {
+                required: "Tickets number is required",
+              })}
               name="maxTickets"
               id="maxTickets"
               type="number"
@@ -115,20 +144,20 @@ const ClientCreateInputs = ({newClient}) => {
               label="Tickets for event"
               variant="outlined"
               helperText={formState.errors.maxTickets?.message}
-              sx={{flex: '2'}}
-
+              sx={{ flex: "2" }}
             />
-          <Button
-            type="submit"
-            variant="contained"
-            color="info"
-            disableElevation
-            size="medium"
-            sx={{height: 'max-content', flex: '1', marginTop: '10px'}}
-            disabled= {!isValid}
-          >
-            Create event
-          </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="info"
+              disableElevation
+              size="medium"
+              sx={{ height: "max-content", flex: "1", marginTop: "10px" }}
+              disabled={!isValid}
+            >
+              Create event
+            </Button>
+          </Box>
         </Paper>
       </form>
     </Box>
