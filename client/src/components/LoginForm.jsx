@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
 	TextField,
 	Button,
@@ -14,8 +14,10 @@ import { useForm } from 'react-hook-form'
 import { ApiURL } from '../main'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 
 const LoginForm = () => {
+	const { setUser } = useContext(UserContext)
 	const navigate = useNavigate()
 	const {
 		register,
@@ -37,8 +39,9 @@ const LoginForm = () => {
 			localStorage.setItem('token', userData.data.token)
 			localStorage.setItem('user', JSON.stringify(userData.data.user))
 			navigate('/admin/home')
+			setUser({ ...userData.data.user, type: 'admin' })
 		} catch (err) {
-			return toast.error(err.response.data.message)
+			toast.error(err.response.data.message)
 		}
 	}
 
