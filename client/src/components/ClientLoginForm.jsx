@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
-  TextField,
-  Button,
+  Box,
   Container,
-  FormControl,
-  InputLabel,
+  TextField,
   InputAdornment,
+  InputLabel,
   IconButton,
+  FormControl,
   OutlinedInput,
+  Button,
+  Typography
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import { useForm } from "react-hook-form";
 
-const LoginForm = () => {
+const ClientLoginForm = () => {
   const {
     register,
     handleSubmit,
+    formState,
     formState: { errors, isValid },
-    watch,
   } = useForm();
+
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -26,15 +29,8 @@ const LoginForm = () => {
     event.preventDefault();
   };
 
-  watch("email");
   const onSubmit = (data) => {
     console.log(data);
-    // Send data to Endpoint Login user
-    try {
-      // success alert
-    } catch (err) {
-      // error alert
-    }
   };
 
   return (
@@ -42,20 +38,26 @@ const LoginForm = () => {
       <Container
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
+        <Box
+        sx={{
+          backgroundColor: 'lightgray',
+          padding: '5px',
+          textAlign: 'center',
+          marginTop: '10px'
+        }}
+        >
+          <Typography variant="overline" component="h3">Please sign-in with provided credentials</Typography>
+        </Box>
         <TextField
-          {...register("email", {
+          {...register("username", {
             required: true,
-            pattern: {
-              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-              message: "Please enter a valid mail",
-            },
           })}
-          type="email"
-          id="email"
-          label="email"
+          id="username"
+          name="username"
           variant="outlined"
           sx={{ width: "100%" }}
           margin="normal"
+          label="Username"
           required
         />
         <FormControl sx={{ width: "100%" }} required variant="outlined">
@@ -64,6 +66,7 @@ const LoginForm = () => {
             {...register("password", { required: true })}
             id="password"
             type={showPassword ? "text" : "password"}
+            required
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -83,9 +86,9 @@ const LoginForm = () => {
         <Button
           variant="contained"
           type="submit"
-          sx={{ marginTop: "10px", width: "max-content", padding: "7px" }}
-          disabled={!isValid}
           color='secondary'
+          sx={{ marginY: "10px", width: "max-content", padding: "7px" }}
+          disabled={!isValid}
         >
           Login
         </Button>
@@ -94,4 +97,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ClientLoginForm;
