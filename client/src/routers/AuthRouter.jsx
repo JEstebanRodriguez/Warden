@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
-import AdminDashboard from '../pages/AdminDashboard'
+import { AdminDashboard } from '../pages'
 
-const PrivateRouter = () => {
+const AuthRouter = () => {
 	const { user } = useContext(UserContext)
-	return user.email ? (
+	return user.type === 'admin' ? (
 		<Routes>
 			<Route path='home' element={<AdminDashboard />} />
 		</Routes>
@@ -14,4 +14,4 @@ const PrivateRouter = () => {
 	)
 }
 
-export default PrivateRouter
+export default AuthRouter

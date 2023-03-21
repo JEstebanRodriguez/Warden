@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { Container, Typography, Box, Fab } from "@mui/material";
-import ClientCreateInputs from "../components/ClientCreateInputs";
-import ClientsTable from "../components/ClientsTable";
-import LogoutIcon from "@mui/icons-material/Logout";
+import React, { useContext, useState } from 'react'
+import { Container, Typography, Box, Fab } from '@mui/material'
+import ClientCreateInputs from '../components/ClientCreateInputs'
+import ClientsTable from '../components/ClientsTable'
+import LogoutIcon from '@mui/icons-material/Logout'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 
 const AdminDashboard = () => {
+	const { user } = useContext(UserContext)
 	const [clients, setClients] = useState([])
 	const [counter, setCounter] = useState(1)
 
@@ -31,6 +33,7 @@ const AdminDashboard = () => {
 
 	return (
 		<Box component='main' sx={{ padding: '2%' }}>
+			<Typography>Active Session: {user?.name}</Typography>
 			<Fab
 				onClick={handleLogout}
 				variant='extended'
@@ -41,7 +44,7 @@ const AdminDashboard = () => {
 				Logout
 			</Fab>
 			<Typography variant='h4' gutterBottom align='center'>
-				Dashboard Admin
+				Admin Dashboard
 			</Typography>
 			<ClientCreateInputs newClient={addClient} />
 			<ClientsTable rows={clients} />
@@ -49,4 +52,4 @@ const AdminDashboard = () => {
 	)
 }
 
-export default AdminDashboard;
+export default AdminDashboard
