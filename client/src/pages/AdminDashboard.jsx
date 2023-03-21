@@ -20,9 +20,15 @@ const AdminDashboard = () => {
     console.log(clients);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    
+  }
+
   return (
     <Box component="main" sx={{ padding: "2%" }}>
-      <Fab variant="extended" size="medium" color='secondary' sx={{position: 'absolute', right: '20px', top: '8px'}}>
+      <Fab onClick={handleLogout} variant="extended" size="medium" color='secondary' sx={{position: 'absolute', right: '20px', top: '8px'}}>
         <LogoutIcon sx={{ mr: 1}} />
         Logout
       </Fab>
