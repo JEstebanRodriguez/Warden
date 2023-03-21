@@ -1,39 +1,41 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useContext, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import {
-  Box,
-  Container,
-  TextField,
-  InputAdornment,
-  InputLabel,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  Button,
-  Typography
-} from "@mui/material";
-import { VisibilityOff, Visibility } from "@mui/icons-material";
+	Box,
+	Container,
+	TextField,
+	InputAdornment,
+	InputLabel,
+	IconButton,
+	FormControl,
+	OutlinedInput,
+	Button,
+	Typography
+} from '@mui/material'
+import { VisibilityOff, Visibility } from '@mui/icons-material'
+import { UserContext } from '../context/UserContext'
 
 const ClientLoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState,
-    formState: { errors, isValid },
-  } = useForm();
+	const { setUser } = useContext(UserContext)
+	const {
+		register,
+		handleSubmit,
+		formState,
+		formState: { errors, isValid }
+	} = useForm()
 
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+	const [showPassword, setShowPassword] = useState(false)
+	const handleClickShowPassword = () => setShowPassword((show) => !show)
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+	const handleMouseDownPassword = (event) => {
+		event.preventDefault()
+	}
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+	const onSubmit = (data) => {
+		console.log(data)
+	}
 
-  return (
+	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Container
 				sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -93,6 +95,6 @@ const ClientLoginForm = () => {
 			</Container>
 		</form>
 	)
-};
+}
 
-export default ClientLoginForm;
+export default ClientLoginForm

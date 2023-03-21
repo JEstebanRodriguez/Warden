@@ -3,7 +3,7 @@ http://localhost:4000/api/
 
 # USER CRUD
 
-### GET: /users/
+### GET: /users/all
 ### GET: /users/:_id
 ### POST: /users/add
 ### PUT: /users/update/:_id
@@ -12,4 +12,5 @@ http://localhost:4000/api/
 # AUTH
 
 ### POST: /auth/login/
+### POST: /auth/client-login/
 
