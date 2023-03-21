@@ -7,9 +7,17 @@ export const login = async (req, res, next) => {
     const { email, password } = req.body
     try {
         const user = await User.findOne({ email })
-        if (!user) throw new Error('Los datos no son correctos')
+        if (!user) {
+            res.status(400)
+            throw new Error('Los datos no son correctos')
+            return
+        }
         const hashPassword = passwordCompare(password, user.password)
-        if (!hashPassword) throw new Error('Los datos no son correctos')
+        if (!hashPassword) {
+            res.status(400)
+            throw new Error('Los datos no son correctos')
+            return
+        }
         const userAdapter = {
             _id: user._id,
             name: user.name,
