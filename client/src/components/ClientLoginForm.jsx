@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
 	Box,
@@ -14,9 +14,14 @@ import {
 } from '@mui/material'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
 import { UserContext } from '../context/UserContext'
+import { toast } from 'react-hot-toast'
+import { ApiURL } from '../main'
+import { saveToStorage } from '../helpers/storage.helper'
+import { useNavigate } from 'react-router-dom'
 
 const ClientLoginForm = () => {
 	const { setUser } = useContext(UserContext)
+	const navigate = useNavigate()
 	const {
 		register,
 		handleSubmit,
@@ -31,8 +36,16 @@ const ClientLoginForm = () => {
 		event.preventDefault()
 	}
 
-	const onSubmit = (data) => {
-		console.log(data)
+	const onSubmit = async (body) => {
+		try {
+			const { data: eventData } = await ApiURL.post('/auth/client-login', body)
+			saveToStorage('user', JSON.stringify(eventData.data.user))
+			saveToStorage('token', eventData.data.token)
+			setUser({ ...eventData.data.user, type: 'client' })
+			navigate('/home')
+		} catch (err) {
+			toast.error(err.response.data.message)
+		}
 	}
 
 	return (
@@ -51,11 +64,11 @@ const ClientLoginForm = () => {
 					</Typography>
 				</Box>
 				<TextField
-					{...register('username', {
+					{...register('userName', {
 						required: true
 					})}
-					id='username'
-					name='username'
+					id='userName'
+					name='userName'
 					variant='outlined'
 					sx={{ width: '100%' }}
 					margin='normal'

@@ -15,6 +15,7 @@ import { ApiURL } from '../main'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
+import { saveToStorage } from '../helpers/storage.helper'
 
 const LoginForm = () => {
 	const { setUser } = useContext(UserContext)
@@ -36,8 +37,8 @@ const LoginForm = () => {
 	const onSubmit = async (body) => {
 		try {
 			const { data: userData } = await ApiURL.post('/auth/login', body)
-			localStorage.setItem('token', userData.data.token)
-			localStorage.setItem('user', JSON.stringify(userData.data.user))
+			saveToStorage('token', userData.data.token)
+			saveToStorage('user', JSON.stringify(userData.data.user))
 			navigate('/admin/home')
 			setUser({ ...userData.data.user, type: 'admin' })
 		} catch (err) {
