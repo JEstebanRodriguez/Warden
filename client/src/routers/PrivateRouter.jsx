@@ -7,7 +7,7 @@ const PrivateRouter = () => {
 	const { user } = useContext(UserContext)
 	return user.email ? (
 		<Routes>
-			<Route path='/admin/home' element={<AdminDashboard />} />
+			<Route path='home' element={<AdminDashboard />} />
 		</Routes>
 	) : (
 		<Navigate to='/admin' />
