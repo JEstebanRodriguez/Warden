@@ -35,10 +35,13 @@ export const getTicketsByEventId = async (req, res, next) => {
 export const createEvent = async (req, res, next) => {
     const body = req.body;
     try {
-        const hashPassword = passwordEncrypt(body.password);
+        const hashPassword = passwordEncrypt(body.userPassword);
         const newEvent = new Event({ ...body, password: hashPassword });
         const savedEvent = await newEvent.save();
-        return successResponse(res, "Event created successfully", 201);
+        return successResponse(res, {
+            message: "Event created successfully",
+            savedEvent
+        }, 201);
     } catch (err) {
         next(err);
     }

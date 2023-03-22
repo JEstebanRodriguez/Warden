@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { Box, Button, Paper } from '@mui/material'
-import { getValueFromValueOptions } from '@mui/x-data-grid/components/panel/filterPanel/filterPanelUtils'
 import { ApiURL } from '../main'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import Swal from 'sweetalert2'
 import { toast } from 'react-hot-toast'
 
-const ClientsTable = () => {
-	const [events, setEvents] = useState([])
-
+const ClientsTable = ({ events, setEvents }) => {
 	const handleEventDelete = async (id) => {
 		Swal.fire({
 			title: `Are you sure to delete this event?`,
@@ -22,6 +19,8 @@ const ClientsTable = () => {
 		}).then(async (result) => {
 			if (result.isConfirmed) {
 				const { data: event } = await ApiURL.delete(`/events/delete/${id}`)
+				const updateEvents = events.filter((ev) => ev._id !== id)
+				setEvents(updateEvents)
 				toast.success(event.data)
 			}
 		})
@@ -49,15 +48,6 @@ const ClientsTable = () => {
 		}
 	]
 
-	const getEvents = async () => {
-		try {
-			const { data: events } = await ApiURL.get('/events/all')
-			setEvents(events.data)
-		} catch (err) {
-			console.error(err)
-		}
-	}
-
 	const loadRows = () => {
 		let rows = []
 		events?.map((event) => {
@@ -72,10 +62,6 @@ const ClientsTable = () => {
 		return rows
 	}
 
-	useEffect(() => {
-		getEvents()
-	}, [events])
-
 	return (
 		<Box sx={{ marginTop: '20px' }}>
 			<Paper sx={{ padding: '20px', height: 700 }}>
@@ -85,6 +71,8 @@ const ClientsTable = () => {
 					// pageSize={5} feature not available for community version
 					// rowsPerPageOptions={5}  feature not available for community version
 					checkboxSelection
+					// getRowId={}
+					getRowId={(row) => row.id}
 				/>
 			</Paper>
 		</Box>
