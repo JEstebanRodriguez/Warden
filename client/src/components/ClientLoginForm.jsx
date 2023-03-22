@@ -39,7 +39,7 @@ const ClientLoginForm = () => {
 	const onSubmit = async (body) => {
 		try {
 			const { data: eventData } = await ApiURL.post('/auth/client-login', body)
-			const dataAdapter = { ...userData.data.user, type: 'client' }
+			const dataAdapter = { ...eventData.data.user, type: 'client' }
 			saveToStorage('user', JSON.stringify(dataAdapter))
 			saveToStorage('token', eventData.data.token)
 			setUser(dataAdapter)

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, TextField, Paper, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { ApiURL } from '../main'
-import { toast } from 'react-hot-toast'
+import { toast, Toaster } from 'react-hot-toast'
 
 const ClientCreateInputs = ({ setEvents }) => {
 	const initialValues = {
@@ -46,6 +46,7 @@ const ClientCreateInputs = ({ setEvents }) => {
 
 	return (
 		<Box>
+			<Toaster />
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Paper
 					sx={{
