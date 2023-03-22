@@ -14,37 +14,42 @@ const SentTicketsTable = ({ logs }) => {
   ]
 
   const columns = [
-    // {field: 'id', headerName: 'ID', flex: 1},
-    { field: "receiverEmail", headerName: "Email of Receiver", flex: 3 },
-    { field: "quantity", headerName: "Quantity of Tickets", flex: 2 },
-    {field: 'actions', headerName: 'Actions', flex: 2,
-  renderCell: (params) => (
-    <>
-    <IconButton
-      // variant='contained'
-      // onClick={deleteTickets(eventID)}  // function to delete all tickets to this receiver
-      aria-label="delete"
-      color='error'
-    >
-      <DeleteForeverIcon />
+		{ field: 'id', headerName: 'ID', flex: 1 },
+		{ field: 'receiverEmail', headerName: 'Email of Receiver', flex: 3 },
+		{ field: 'quantity', headerName: 'Quantity of Tickets', flex: 2 }
+		// {
+		// 	field: 'actions',
+		// 	headerName: 'Actions',
+		// 	flex: 2,
+		// 	renderCell: (params) => (
+		// 		<>
+		// 			<IconButton
+		// 				// variant='contained'
+		// 				// onClick={deleteTickets(eventID)}  // function to delete all tickets to this receiver
+		// 				aria-label='delete'
+		// 				color='error'>
+		// 				<DeleteForeverIcon />
+		// 			</IconButton>
+		// 		</>
+		// 	)
+		// }
+	]
 
-    </IconButton>
-    </>
-  )
-  }
-  ];
-
-  return (
-    <Box sx={{ marginTop: "20px" }}>
-      <Paper sx={{ padding: "20px", height: 700 }}>
-        <DataGrid 
-        // getRowId={(row) => row._id}  To grab the unique identifier from property _id
-        rows={logs} columns={columns} checkboxSelection slots={{
-          toolbar: TableTitle
-        }} />
-      </Paper>
-    </Box>
-  );
+	return (
+		<Box sx={{ marginTop: '20px' }}>
+			<Paper sx={{ padding: '20px', height: 700 }}>
+				<DataGrid
+					// getRowId={(row) => row._id}  To grab the unique identifier from property _id
+					rows={rows}
+					columns={columns}
+					checkboxSelection
+					slots={{
+						toolbar: TableTitle
+					}}
+				/>
+			</Paper>
+		</Box>
+	)
 };
 
 export default SentTicketsTable;
