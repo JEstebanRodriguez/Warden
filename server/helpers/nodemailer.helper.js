@@ -19,7 +19,5 @@ export const notifyAdmin = async () => {
         subject: "New Ticket was Created",
         html: "<h1>Hola World</h1>"
     })
-console.log()
     return data;
-
 }
