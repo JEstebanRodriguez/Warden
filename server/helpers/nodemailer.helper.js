@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-export const sendMail = async () => {
+export const sendMail = async (newTickets, eventDetailsToSend) => {
     const tp = nodemailer.createTransport({
         host: "in-v3.mailjet.com",
         port: 465,
@@ -11,11 +11,22 @@ export const sendMail = async () => {
         }
     });
 
-    const data = await tp.sendMail({
+    const mailData = await tp.sendMail({
         from: `Warder Inc. <${process.env.GGL_ACC}>`,
-        to: "mail@ejemplo.com",
+        to: eventDetailsToSend.email,
         subject: "New Ticket was Created",
-        html: "<h1>Hola World</h1>"
-    })
-    return data;
+        html: `<div>
+        <h1>${eventDetailsToSend.userName} invited you to ${eventDetailsToSend.eventName}</h1>
+        <p>Here you have ${eventDetailsToSend.tickets} tickets</p>
+        ${newTickets.map(ticket => `
+            <div>
+                <h2>Ticket Code: ${ticket._id}</h2>
+                <img src="https://chart.googleapis.com/chart?cht=qr&chs=100x100&chl=${ticket._id}&choe=UTF-8" alt='code' style="display: inline-block"/>
+            </div>
+            <hr>
+        `).join('')}
+    </div>
+`,
+    });
+    return mailData;
 }
