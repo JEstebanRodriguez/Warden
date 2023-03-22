@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-export const notifyAdmin = async () => {
+export const sendMail = async () => {
     const tp = nodemailer.createTransport({
         host: "in-v3.mailjet.com",
         port: 465,
