@@ -22,13 +22,23 @@ const AdminDashboard = () => {
 
   return (
     <Box component="main" sx={{ padding: "2%" }}>
-      <Fab variant="extended" size="medium" color='secondary' sx={{position: 'absolute', right: '20px', top: '8px'}}>
-        <LogoutIcon sx={{ mr: 1}} />
-        Logout
-      </Fab>
-      <Typography variant="h4" gutterBottom align="center">
-        Dashboard Admin
-      </Typography>
+      <Box sx={{display: "flex", alignItems: 'center', width: '100%', justifyContent: 'end', marginBottom: '10px'}}>
+        <Typography variant="h4" align='center' sx={{ flex: 1, textTransform: 'uppercase', fontWeight: 'bold' }} >
+          Main Dashboard
+        </Typography>
+        <Box >
+          <Fab
+            variant="extended"
+            size="medium"
+            color="secondary"
+            // sx={{ position: "absolute", right: "20px", top: "8px" }}
+            sx={{ flex: 1 }}
+          >
+            <LogoutIcon />
+            Logout
+          </Fab>
+        </Box>
+      </Box>
       <ClientCreateInputs newClient={addClient} />
       <ClientsTable rows={clients} />
     </Box>
