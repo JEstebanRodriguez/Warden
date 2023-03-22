@@ -47,7 +47,7 @@ const AdminDashboard = () => {
 				Admin Dashboard
 			</Typography>
 			<ClientCreateInputs newClient={addClient} />
-			<ClientsTable rows={clients} />
+			<ClientsTable />
 		</Box>
 	)
 }

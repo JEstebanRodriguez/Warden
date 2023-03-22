@@ -37,10 +37,11 @@ const LoginForm = () => {
 	const onSubmit = async (body) => {
 		try {
 			const { data: userData } = await ApiURL.post('/auth/login', body)
+			const dataAdapter = { ...userData.data.user, type: 'admin' }
 			saveToStorage('token', userData.data.token)
-			saveToStorage('user', JSON.stringify(userData.data.user))
+			saveToStorage('user', JSON.stringify(dataAdapter))
 			navigate('/admin/home')
-			setUser({ ...userData.data.user, type: 'admin' })
+			setUser(dataAdapter)
 		} catch (err) {
 			toast.error(err.response.data.message)
 		}
