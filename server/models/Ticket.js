@@ -8,7 +8,7 @@ const TicketSchema = new Schema({
         ref: 'event',
         required: true
     },
-    valid: {
+    isValid: {
         type: Boolean,
         default: true
     }
