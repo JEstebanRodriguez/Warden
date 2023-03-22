@@ -1,4 +1,5 @@
 import { successResponse } from "../helpers/responses.js";
+import { sendMail } from '../helpers/nodemailer.helper.js'
 import Ticket from "../models/Ticket.js";
 
 export const createTicket = async (req, res, next) => {
@@ -14,14 +15,13 @@ export const createTicket = async (req, res, next) => {
 
         const eventDetailsToSend = {
             userName: eventDetailForTicket.event_id.userName,
+            eventName: eventDetailForTicket.event_id.eventName,
             eventDate: eventDetailForTicket.event_id.createdAt,
             email,
             tickets: qty
         }
 
-        // en la variable newTickets estan todos los tickets creados, el array a iterar en el nodemailer,
-        // en la variable eventDetailsToSend esta los detalles del evento y el email a donde enviar, y el usuario que organizo y cuantos tickets van, para informar.
-        tuhelper(newTickets, eventDetailsToSend)
+        sendMail(newTickets, eventDetailsToSend)
 
         return successResponse(res, "Ticket sends successfully", 201)
     } catch (err) {
