@@ -13,7 +13,7 @@ import { ApiURL } from '../main'
 import { toast, Toaster } from 'react-hot-toast'
 
 const SendTicketsInputs = ({ set, logs }) => {
-	const { user } = useContext(UserContext)
+	const { user, setUser } = useContext(UserContext)
 	const initialValues = {
 		receiverEmail: '',
 		quantity: 1
@@ -36,6 +36,7 @@ const SendTicketsInputs = ({ set, logs }) => {
 			qty: +values.quantity,
 			event_id: user._id
 		}
+		setUser({ ...user, maxTickets: user.maxTickets - +values.quantity })
 		try {
 			const { data: ticket } = await ApiURL.post('/tickets/add', body)
 			toast.success(ticket.data)
