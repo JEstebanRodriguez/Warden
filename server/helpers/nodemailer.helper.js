@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer'
-// import dotenv from 'dotenv'
-// dotenv.config();
+import dotenv from 'dotenv'
+// dotenv.config();/
+
+"H"
 
 export const notifyAdmin = async () => {
     const tp = nodemailer.createTransport({
