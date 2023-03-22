@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
 	Box,
@@ -35,6 +35,10 @@ const ClientLoginForm = () => {
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault()
 	}
+
+	useEffect(() => {
+		localStorage.getItem('token') && navigate('/home')
+	}, [])
 
 	const onSubmit = async (body) => {
 		try {
