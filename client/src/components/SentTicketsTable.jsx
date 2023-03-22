@@ -6,12 +6,12 @@ import TableTitle from "./TableTitle";
 
 const SentTicketsTable = ({ logs }) => {
   // Dummy data for testing
-  const rows = [
-    {id: 1, receiverEmail: 'ma@mail.com', quantity: 10},
-    {id: 2, receiverEmail: 'ma@mail.com', quantity: 15},
-    {id: 3, receiverEmail: 'ma@mail.com', quantity: 20},
-    {id: 4, receiverEmail: 'ma@mail.com', quantity: 25}
-  ]
+  // const rows = [
+  //   {id: 1, receiverEmail: 'ma@mail.com', quantity: 10},
+  //   {id: 2, receiverEmail: 'ma@mail.com', quantity: 15},
+  //   {id: 3, receiverEmail: 'ma@mail.com', quantity: 20},
+  //   {id: 4, receiverEmail: 'ma@mail.com', quantity: 25}
+  // ]
 
   const columns = [
 		{ field: 'id', headerName: 'ID', flex: 1 },
@@ -39,8 +39,9 @@ const SentTicketsTable = ({ logs }) => {
 		<Box sx={{ marginTop: '20px' }}>
 			<Paper sx={{ padding: '20px', height: 700 }}>
 				<DataGrid
-					// getRowId={(row) => row._id}  To grab the unique identifier from property _id
-					rows={rows}
+					// To grab the unique identifier from data
+					getRowId={(row) => row.receiverEmail + row.quantity}  
+					rows={logs}
 					columns={columns}
 					checkboxSelection
 					slots={{

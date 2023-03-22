@@ -40,6 +40,8 @@ const SendTicketsInputs = ({ set, logs }) => {
 			const { data: ticket } = await ApiURL.post('/tickets/add', body)
 			toast.success(ticket.data)
 			console.log(ticket)
+			// reset inputs
+			reset(initialValues)
 		} catch (err) {
 			console.error(err)
 		}
@@ -48,11 +50,6 @@ const SendTicketsInputs = ({ set, logs }) => {
 		// set new Logs state with de new values
 		aux.push(values)
 		set(aux)
-
-		// Reset Inputs
-		if (isSubmitSuccessfull) {
-			reset(initialValues)
-		}
 	}
 
 	return (
