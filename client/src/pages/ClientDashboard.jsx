@@ -72,7 +72,7 @@ const ClientDashboard = () => {
 					</Fab>
 				</Box>
 			</Box>
-			<SendTicketsInputs logs={logs} set={setLogs} />{' '}
+			<SendTicketsInputs logs={logs} set={setLogs} />
 			{/* have a function that refreshes the state of register when new mail is sent*/}
 			<SentTicketsTable logs={logs} />
 		</Box>
