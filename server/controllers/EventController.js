@@ -39,7 +39,7 @@ export const createEvent = async (req, res, next) => {
         const newEvent = new Event({ ...body, password: hashPassword });
         const savedEvent = await newEvent.save();
         return successResponse(res, "Event created successfully", 201);
-    } catch (error) {
+    } catch (err) {
         next(err);
     }
 };
@@ -50,9 +50,9 @@ export const createEvent = async (req, res, next) => {
 //     try {
 //         const hashPassword = passwordEncrypt(body.password);
 //         await Event.create({ ...body, password: hashPassword });
-        
+
 //     } catch (err) {
-        
+
 //     }
 // };
 
