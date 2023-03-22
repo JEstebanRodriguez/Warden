@@ -1,132 +1,94 @@
-import React from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import { Box, Paper } from "@mui/material";
+import React, { useEffect, useState } from 'react'
+import { DataGrid } from '@mui/x-data-grid'
+import { Box, Button, Paper } from '@mui/material'
+import { getValueFromValueOptions } from '@mui/x-data-grid/components/panel/filterPanel/filterPanelUtils'
+import { ApiURL } from '../main'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import Swal from 'sweetalert2'
+import { toast } from 'react-hot-toast'
 
-const ClientsTable = ({rows}) => {
-  const columns = [
-    { field: "id", headerName: "ID", flex: 2 },
-    { field: "username", headerName: "Username", flex: 3},
-    { field: "userPassword", headerName: "Password", flex: 3 },
-    { field: "eventName", headerName: "Event Name", flex: 5},
-    { field: "maxTickets", headerName: "Tickets", flex: 3 },
-  ];
+const ClientsTable = () => {
+	const [events, setEvents] = useState([])
 
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 2,
-  //     username: "Aira",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 3,
-  //     username: "Zayn",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 4,
-  //     username: "Banana",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 5,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 6,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 7,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 8,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 9,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 10,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 11,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 12,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 13,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  //   {
-  //     id: 14,
-  //     username: "Snow",
-  //     password: "hashedpassword",
-  //     eventName: "Bithday",
-  //     maxTickets: 10,
-  //   },
-  // ];
+	const handleEventDelete = async (id) => {
+		Swal.fire({
+			title: `Are you sure to delete this event?`,
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		}).then(async (result) => {
+			if (result.isConfirmed) {
+				const { data: event } = await ApiURL.delete(`/events/delete/${id}`)
+				toast.success(event.data)
+			}
+		})
+	}
 
+	const columns = [
+		{ field: 'username', headerName: 'Username', flex: 3 },
+		{ field: 'userPassword', headerName: 'Password', flex: 3 },
+		{ field: 'eventName', headerName: 'Event Name', flex: 5 },
+		{ field: 'maxTickets', headerName: 'Tickets', flex: 3 },
+		{
+			field: 'actions',
+			headerName: 'Actions',
+			flex: 3,
+			renderCell: (params) => (
+				<>
+					<Button
+						variant='contained'
+						onClick={() => handleEventDelete(params.id)}
+						color='error'>
+						<DeleteForeverIcon />
+					</Button>
+				</>
+			)
+		}
+	]
 
+	const getEvents = async () => {
+		try {
+			const { data: events } = await ApiURL.get('/events/all')
+			setEvents(events.data)
+		} catch (err) {
+			console.error(err)
+		}
+	}
 
-  return (
-    <Box sx={{ marginTop: "20px" }}>
-      <Paper sx={{ padding: "20px", height: 700 }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          // pageSize={5} feature not available for community version
-          // rowsPerPageOptions={5}  feature not available for community version
-          checkboxSelection
-        />
-      </Paper>
-    </Box>
-  );
-};
+	const loadRows = () => {
+		let rows = []
+		events?.map((event) => {
+			rows.push({
+				id: event._id,
+				username: event.userName,
+				userPassword: event.password,
+				eventName: event.eventName,
+				maxTickets: event.maxTickets
+			})
+		})
+		return rows
+	}
 
-export default ClientsTable;
+	useEffect(() => {
+		getEvents()
+	}, [events])
+
+	return (
+		<Box sx={{ marginTop: '20px' }}>
+			<Paper sx={{ padding: '20px', height: 700 }}>
+				<DataGrid
+					rows={loadRows()}
+					columns={columns}
+					// pageSize={5} feature not available for community version
+					// rowsPerPageOptions={5}  feature not available for community version
+					checkboxSelection
+				/>
+			</Paper>
+		</Box>
+	)
+}
+
+export default ClientsTable

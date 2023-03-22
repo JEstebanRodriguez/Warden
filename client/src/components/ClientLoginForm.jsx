@@ -39,9 +39,10 @@ const ClientLoginForm = () => {
 	const onSubmit = async (body) => {
 		try {
 			const { data: eventData } = await ApiURL.post('/auth/client-login', body)
-			saveToStorage('user', JSON.stringify(eventData.data.user))
+			const dataAdapter = { ...userData.data.user, type: 'client' }
+			saveToStorage('user', JSON.stringify(dataAdapter))
 			saveToStorage('token', eventData.data.token)
-			setUser({ ...eventData.data.user, type: 'client' })
+			setUser(dataAdapter)
 			navigate('/home')
 		} catch (err) {
 			toast.error(err.response.data.message)
