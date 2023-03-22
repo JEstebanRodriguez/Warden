@@ -28,3 +28,18 @@ export const createTicket = async (req, res, next) => {
         next(err);
     }
 };
+
+export const useTicket = async (req, res, next) => {
+    try {
+        // console.log(req.body)
+        const Validation = await Ticket.findById({_id: req.body._id})
+        if (Validation.isValid == true) {
+            const changeValidity = await Ticket.findOneAndUpdate({_id: req.body._id}, {isValid: false})
+            return successResponse(res, 'Ticket used, no longer valid', 201)
+        }
+        throw new Error("Ticket invalid. You cannot enter.")
+    } catch (err) {
+        next(err)
+    }
+}
+
