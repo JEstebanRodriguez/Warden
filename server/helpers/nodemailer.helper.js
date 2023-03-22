@@ -1,8 +1,4 @@
 import nodemailer from 'nodemailer'
-import dotenv from 'dotenv'
-// dotenv.config();/
-
-"H"
 
 export const notifyAdmin = async () => {
     const tp = nodemailer.createTransport({
@@ -23,8 +19,3 @@ export const notifyAdmin = async () => {
     })
     return data;
 }
-
-
-SMTP_ID= '262512b93209b57aada5bf646a01a2d3'
-SMTP_PS= '8ab3827f5f589851460fb7288dfe2aa7'
-GGL_ACC= 'warderinc.py@gmail.com'
