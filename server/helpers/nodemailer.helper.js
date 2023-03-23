@@ -2,8 +2,8 @@ import nodemailer from 'nodemailer'
 
 export const sendMail = async (newTickets, eventDetailsToSend) => {
     const tp = nodemailer.createTransport({
-        host: "in-v3.mailjet.com",
-        port: 465,
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
         secure: true,
         auth: {
             user: process.env.SMTP_ID,
