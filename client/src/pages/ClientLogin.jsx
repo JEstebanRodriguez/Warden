@@ -12,7 +12,7 @@ const ClientLogin = () => {
   >
     <Paper elevation={3} sx={{ padding: "20px", display: 'flex', flexDirection: 'column', alignContent: 'center' }}>
       <Typography variant="h4" gutterBottom align="center" marginTop={1} sx={{fontWeight: 'bold', textTransform: 'uppercase'}}>
-        Welcome to Warder App
+        Welcome to Warden App
       </Typography>
       <LocalActivityIcon fontSize="large" sx={{marginX: 'auto'}}/>
       <ClientLoginForm />
