@@ -3,6 +3,7 @@ import { Container, Paper } from "@mui/material";
 import { QrScanner } from "@yudiel/react-qr-scanner";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 const ClientRead = () => {
   const { user } = useContext(UserContext);
@@ -20,12 +21,25 @@ const ClientRead = () => {
         const useTicket = await axios.put(`${import.meta.env.VITE_API_URL}/tickets/use`, {_id: result, event_id: user._id})
         console.log(useTicket)
         if (useTicket.status == 201) {
-          alert("You can enter")
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'You can enter',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }
       
     } catch (err) {
-      alert(err?.response.data.message)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: err?.response.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
+      // alert(err?.response.data.message)
     }
   };
 
