@@ -2,7 +2,7 @@
 
 ###
 
-<p align="left">Warder App es una aplicación web para la generación de tickets electronicos ligados a eventos sociales creados por el administrador relacionados a los datos del organizador del evento y la cantidad de personas invitadas. Luego de la creación del evento el usuario organizador reparte los tickets para el evento desde la aplicación web, cuyo procedimiento es ingresar los emails de los invitados y asignarle la cantidad de tickets a enviar, posterior a esto warder app se encargará de enviar un correo a los invitados con los tickets los cuales poseen un código qr, que sirve para el control del ingreso al evento.</p>
+<p align="left">Warden App es una aplicación web para la generación de tickets electrónicos ligados a eventos sociales creados por el administrador relacionados a los datos del organizador del evento y la cantidad de personas invitadas. Luego de la creación del evento el usuario organizador reparte los tickets para el evento desde la aplicación web, cuyo procedimiento es ingresar los emails de los invitados y asignarle la cantidad de tickets a enviar, posterior a esto warder app se encargará de enviar un correo a los invitados con los tickets los cuales poseen un código qr, que sirve para el control del ingreso al evento.</p>
 
 ###
 
