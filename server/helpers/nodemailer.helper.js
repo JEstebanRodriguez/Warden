@@ -12,7 +12,7 @@ export const sendMail = async (newTickets, eventDetailsToSend) => {
     });
 
     const mailData = await tp.sendMail({
-        from: `Warder Inc. <${process.env.GGL_ACC}>`,
+        from: `Warden Inc. <${process.env.GGL_ACC}>`,
         to: eventDetailsToSend.email,
         subject: "New Ticket was Created",
         html: `<div>
