@@ -7,7 +7,7 @@
 ###
 
 <div align="center">
-  <img height="200" src="https://res.cloudinary.com/xjergx/image/upload/v1680027751/WhatsApp_Image_2023-03-22_at_12.29.34_qdueit.jpg"  />
+  <img height="200" src="https://res.cloudinary.com/xjergx/image/upload/v1680121981/Captura_de_pantalla_2023-03-29_163203_igzgsu.png"  />
 </div>
 
 ###
